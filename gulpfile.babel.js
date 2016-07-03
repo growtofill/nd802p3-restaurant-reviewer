@@ -8,9 +8,9 @@ gulp.task('compile-js', compileJs);
 gulp.task('copy-html', copyHtml);
 
 gulp.task('watch', () => {
-    gulp.watch('src/**/*.css', compileCss);
-    gulp.watch('src/**/*.js', compileJs);
-    gulp.watch('src/**/*.html', copyHtml);
+    gulp.watch('src/**/*.css', ['compile-css']);
+    gulp.watch('src/**/*.{js,jsx}', ['compile-js']);
+    gulp.watch('src/**/*.html', ['copy-html']);
 });
 
 gulp.task('build', ['compile-css', 'compile-js', 'copy-html']);
