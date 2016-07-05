@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 
-import Explore from '../containers/Explore.jsx';
-import Venues from '../containers/Venues.jsx';
-
 export default class App extends Component {
     render () {
+        const { main, aside } = this.props;
+
         return (
             <div>
                 <div className="navbar navbar-default">
@@ -14,12 +13,8 @@ export default class App extends Component {
                 </div>
                 <div className="container">
                     <div className="row">
-                        <div className="col-sm-4">
-                            <Explore />
-                        </div>
-                        <div className="col-sm-8">
-                            <Venues />
-                        </div>
+                        <div className="col-sm-4">{aside}</div>
+                        <div className="col-sm-8">{main}</div>
                     </div>
                 </div>
             </div>

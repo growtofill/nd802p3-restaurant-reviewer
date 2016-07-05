@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import {
-    prop,
-    pipe,
-    always
-} from 'ramda';
-
-import { addVenue } from '../actions';
-import { venues } from '../apis/foursquare';
 
 class Explore extends Component {
     render () {
+        const { pathname, query } = this.props.location;
+        const currentLocation = pathname == '/explore' ? query.near : null;
+
         return (
             <form onSubmit={e => this.onSubmit(e)}>
                 <div className="form-group">
@@ -20,7 +14,7 @@ class Explore extends Component {
                         className="form-control"
                         id="locationInput"
                         ref="locationInput"
-                        defaultValue="Kyiv"
+                        defaultValue={currentLocation}
                     />
                 </div>
                 <button type="submit" className="btn btn-primary">Explore</button>
@@ -30,23 +24,16 @@ class Explore extends Component {
     onSubmit(e) {
         const near = this.refs.locationInput.value;
 
-        this.props.onExplore({ near });
+        this.context.router.push({
+            pathname: '/explore',
+            query: { near }
+        });
         e.preventDefault();
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    onExplore({ near }) {
-        venues.explore({ near })
-            .then(data => {
-                data.response.groups[0].items
-                    .forEach(pipe(
-                        prop(['venue']),
-                        addVenue,
-                        dispatch
-                    ));
-            });
-    }
-})
+Explore.contextTypes = {
+  router: React.PropTypes.object
+};
 
-export default connect(always({}), mapDispatchToProps)(Explore);
+export default Explore;
