@@ -1,4 +1,4 @@
-import { omit } from 'ramda';
+import { assoc } from 'ramda';
 
 const initialState = {
     venues: []
@@ -6,13 +6,8 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case 'ADD_VENUE':
-            return Object.assign({}, state, {
-                venues: [
-                    ...state.venues,
-                    omit(['type'], action)
-                ]
-            });
+        case 'REPLACE_VENUES':
+            return assoc('venues', action.venues, state);
         default:
             return state;
     }

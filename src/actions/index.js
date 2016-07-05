@@ -1,13 +1,14 @@
 import {
-    pick,
-    merge,
     pipe,
     map,
-    join,
-    evolve,
     prop,
+    join,
     path,
-    props
+    props,
+    pick,
+    evolve,
+    objOf,
+    merge
 } from 'ramda';
 
 const categories = pipe(
@@ -21,7 +22,7 @@ const photos = pipe(
     join('64x64')
 );
 
-export const addVenue = pipe(
+const toPlainVenue = pipe(
     pick([
         'name',
         'categories',
@@ -34,6 +35,11 @@ export const addVenue = pipe(
         location: prop(['address']),
         hours: prop(['status']),
         photos
-    }),
-    merge({ type: 'ADD_VENUE' })
+    })
 );
+
+export const replaceVenues = pipe(
+    map(toPlainVenue),
+    objOf('venues'),
+    merge({ type: 'REPLACE_VENUES' })
+)

@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import {
     prop,
     pipe,
-    always
+    always,
+    path,
+    map
 } from 'ramda';
 
 import { venues } from '../apis/foursquare';
-import { addVenue } from '../actions';
+import { replaceVenues } from '../actions';
 
 import App from '../components/App.jsx';
 import Explore from '../components/Explore.jsx';
@@ -26,6 +28,7 @@ class AppRouter extends Component {
                         path="/explore"
                         components={{ main: Venues, aside: Explore }}
                         onEnter={explore}
+                        onChange={(_, nextState) => explore(nextState)}
                         />
                     <Route path="/venues/:venueId" component={null} />
                 </Route>
@@ -37,14 +40,12 @@ class AppRouter extends Component {
 const mapDispatchToProps = dispatch => ({
     explore({ location }) {
         venues.explore(location.query)
-            .then(data => {
-                data.response.groups[0].items
-                    .forEach(pipe(
-                        prop(['venue']),
-                        addVenue,
-                        dispatch
-                    ));
-            });
+            .then(pipe(
+                path(['response', 'groups', 0, 'items']),
+                map(prop(['venue'])),
+                replaceVenues,
+                dispatch
+            ));
     }
 });
 
