@@ -1,7 +1,7 @@
 import { assoc } from 'ramda';
 
 const initialState = {
-    venues: []
+    venues: [],
 };
 
 export default (state = initialState, action) => {

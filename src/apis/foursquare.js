@@ -10,9 +10,9 @@ export const venues = {
             + `&client_secret=${clientSecret}`
             + `&near=${near}`
             + `&section=${section}`
-            + `&venuePhotos=1`
-            + `&v=20160618`
-            + `&m=foursquare`
+            + '&venuePhotos=1'
+            + '&v=20160618'
+            + '&m=foursquare'
         ).then(res => res.json());
-    }
+    },
 };

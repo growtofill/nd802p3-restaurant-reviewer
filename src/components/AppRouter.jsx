@@ -6,7 +6,7 @@ import {
     pipe,
     always,
     path,
-    map
+    map,
 } from 'ramda';
 
 import { venues } from '../apis/foursquare';
@@ -29,7 +29,7 @@ class AppRouter extends Component {
                         components={{ main: Venues, aside: Explore }}
                         onEnter={explore}
                         onChange={(_, nextState) => explore(nextState)}
-                        />
+                    />
                     <Route path="/venues/:venueId" component={null} />
                 </Route>
             </Router>
@@ -46,7 +46,7 @@ const mapDispatchToProps = dispatch => ({
                 replaceVenues,
                 dispatch
             ));
-    }
+    },
 });
 
 export default connect(always({}), mapDispatchToProps)(AppRouter);

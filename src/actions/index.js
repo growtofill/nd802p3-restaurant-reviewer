@@ -8,7 +8,7 @@ import {
     pick,
     evolve,
     objOf,
-    merge
+    merge,
 } from 'ramda';
 
 const categories = pipe(
@@ -28,13 +28,13 @@ const toPlainVenue = pipe(
         'categories',
         'location',
         'hours',
-        'photos'
+        'photos',
     ]),
     evolve({
         categories,
         location: prop(['address']),
         hours: prop(['status']),
-        photos
+        photos,
     })
 );
 
@@ -42,4 +42,4 @@ export const replaceVenues = pipe(
     map(toPlainVenue),
     objOf('venues'),
     merge({ type: 'REPLACE_VENUES' })
-)
+);

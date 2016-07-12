@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 
 class Explore extends Component {
-    render () {
+    onSubmit(e) {
+        const near = this.refs.locationInput.value;
+
+        this.context.router.push({
+            pathname: '/explore',
+            query: { near },
+        });
+        e.preventDefault();
+    }
+    render() {
         const { pathname, query } = this.props.location;
-        const currentLocation = pathname == '/explore' ? query.near : null;
+        const currentLocation = pathname === '/explore' ? query.near : null;
 
         return (
             <form onSubmit={e => this.onSubmit(e)}>
@@ -21,19 +30,10 @@ class Explore extends Component {
             </form>
         );
     }
-    onSubmit(e) {
-        const near = this.refs.locationInput.value;
-
-        this.context.router.push({
-            pathname: '/explore',
-            query: { near }
-        });
-        e.preventDefault();
-    }
 }
 
 Explore.contextTypes = {
-  router: React.PropTypes.object
+    router: React.PropTypes.object,
 };
 
 export default Explore;
