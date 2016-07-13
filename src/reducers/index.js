@@ -1,14 +1,21 @@
-import { assoc } from 'ramda';
+import { combineReducers } from 'redux';
+import {
+    indexBy,
+    prop,
+} from 'ramda';
 
-const initialState = {
-    venues: [],
-};
-
-export default (state = initialState, action) => {
+const venues = (state = {}, action) => {
     switch (action.type) {
         case 'REPLACE_VENUES':
-            return assoc('venues', action.venues, state);
+            return indexBy(
+                prop('id'),
+                action.venues
+            );
         default:
             return state;
     }
 };
+
+export default combineReducers({
+    venues,
+});

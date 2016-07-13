@@ -24,6 +24,7 @@ const photos = pipe(
 
 const toPlainVenue = pipe(
     pick([
+        'id',
         'name',
         'categories',
         'location',

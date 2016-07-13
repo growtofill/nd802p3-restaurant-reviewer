@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { pick } from 'ramda';
+import {
+    pipe,
+    pick,
+    evolve,
+    values,
+} from 'ramda';
 
 class Venues extends Component {
     render() {
@@ -8,8 +13,8 @@ class Venues extends Component {
 
         return (
             <div>
-                {venues.map(({ name, categories, location, hours, photos }, index) =>
-                    <div className="media" key={index}>
+                {venues.map(({ id, name, categories, location, hours, photos }) =>
+                    <div className="media" key={id}>
                         <div className="media-left">
                             <img
                                 className="media-object"
@@ -32,4 +37,9 @@ class Venues extends Component {
     }
 }
 
-export default connect(pick(['venues']))(Venues);
+const mapStateToProps = pipe(
+    pick(['venues']),
+    evolve({ venues: values })
+);
+
+export default connect(mapStateToProps)(Venues);
