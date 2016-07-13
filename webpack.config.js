@@ -4,22 +4,22 @@ const DefinePlugin = require('webpack/lib/DefinePlugin');
 
 let plugins = [
     new CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity
-    })
+        name: 'vendor',
+        minChunks: Infinity,
+    }),
 ];
 let devtool = 'source-map';
 
-if (process.env.NODE_ENV == 'production') {
+if (process.env.NODE_ENV === 'production') {
     plugins = plugins.concat([
         new UglifyJsPlugin({
             compress: {
-                warnings: false
-            }
+                warnings: false,
+            },
         }),
         new DefinePlugin({
-            'process.env.NODE_ENV': 'production'
-        })
+            'process.env.NODE_ENV': 'production',
+        }),
     ]);
     devtool = null;
 }
@@ -32,21 +32,21 @@ module.exports = {
             'react',
             'react-dom',
             'react-redux',
-            'redux'
-        ]
+            'redux',
+        ],
     },
     output: {
-        filename: '[name].bundle.js'
+        filename: '[name].bundle.js',
     },
     module: {
         loaders: [
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader'
-            }
-        ]
+                loader: 'babel-loader',
+            },
+        ],
     },
     devtool,
-    plugins
+    plugins,
 };
