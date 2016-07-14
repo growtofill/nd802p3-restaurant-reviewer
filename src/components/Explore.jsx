@@ -11,8 +11,7 @@ class Explore extends Component {
         e.preventDefault();
     }
     render() {
-        const { pathname, query } = this.props.location;
-        const currentLocation = pathname === '/explore' ? query.near : null;
+        const { currentLocation } = this.props;
 
         return (
             <form onSubmit={e => this.onSubmit(e)}>

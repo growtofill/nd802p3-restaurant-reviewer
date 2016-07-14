@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export default class App extends Component {
     render() {
-        const { main, aside } = this.props;
+        const { children } = this.props;
 
         return (
             <div>
@@ -12,10 +12,7 @@ export default class App extends Component {
                     </div>
                 </div>
                 <div className="container">
-                    <div className="row">
-                        <div className="col-sm-4">{aside}</div>
-                        <div className="col-sm-8">{main}</div>
-                    </div>
+                    {children}
                 </div>
             </div>
         );

@@ -16,8 +16,7 @@ import {
 } from '../actions';
 
 import App from '../components/App.jsx';
-import Explore from '../components/Explore.jsx';
-import Venues from '../components/Venues.jsx';
+import Browser from '../components/Browser.jsx';
 
 class AppRouter extends Component {
     render() {
@@ -26,10 +25,10 @@ class AppRouter extends Component {
         return (
             <Router history={hashHistory}>
                 <Route path="/" component={App}>
-                    <IndexRoute components={{ main: null, aside: Explore }} />
+                    <IndexRoute component={Browser} />
                     <Route
                         path="/explore"
-                        components={{ main: Venues, aside: Explore }}
+                        component={Browser}
                         onEnter={explore}
                         onChange={(_, nextState) => explore(nextState)}
                     />
