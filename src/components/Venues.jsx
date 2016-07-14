@@ -5,6 +5,8 @@ import {
     pick,
     evolve,
     values,
+    filter,
+    prop,
 } from 'ramda';
 
 class Venues extends Component {
@@ -39,7 +41,12 @@ class Venues extends Component {
 
 const mapStateToProps = pipe(
     pick(['venues']),
-    evolve({ venues: values })
+    evolve({
+        venues: pipe(
+            filter(prop('visible')),
+            values
+        ),
+    })
 );
 
 export default connect(mapStateToProps)(Venues);

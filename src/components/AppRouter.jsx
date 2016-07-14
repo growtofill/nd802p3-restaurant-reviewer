@@ -10,7 +10,10 @@ import {
 } from 'ramda';
 
 import { venues } from '../apis/foursquare';
-import { replaceVenues } from '../actions';
+import {
+    addVenues,
+    hideAllVenues,
+} from '../actions';
 
 import App from '../components/App.jsx';
 import Explore from '../components/Explore.jsx';
@@ -39,11 +42,12 @@ class AppRouter extends Component {
 
 const mapDispatchToProps = dispatch => ({
     explore({ location }) {
+        dispatch(hideAllVenues());
         venues.explore(location.query)
             .then(pipe(
                 path(['response', 'groups', 0, 'items']),
                 map(prop(['venue'])),
-                replaceVenues,
+                addVenues,
                 dispatch
             ));
     },

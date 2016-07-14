@@ -9,6 +9,7 @@ import {
     evolve,
     objOf,
     merge,
+    always,
 } from 'ramda';
 
 const categories = pipe(
@@ -36,11 +37,14 @@ const toPlainVenue = pipe(
         location: prop(['address']),
         hours: prop(['status']),
         photos,
-    })
+    }),
+    merge({ visible: true })
 );
 
-export const replaceVenues = pipe(
+export const addVenues = pipe(
     map(toPlainVenue),
     objOf('venues'),
-    merge({ type: 'REPLACE_VENUES' })
+    merge({ type: 'ADD_VENUES' })
 );
+
+export const hideAllVenues = always({ type: 'HIDE_ALL_VENUES' });
