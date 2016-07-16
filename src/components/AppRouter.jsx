@@ -7,9 +7,10 @@ import {
     always,
     path,
     map,
+    of,
 } from 'ramda';
 
-import { venues } from '../apis/foursquare';
+import { venues as venuesApi } from '../apis/foursquare';
 import {
     addVenues,
     hideAllVenues,
@@ -17,10 +18,11 @@ import {
 
 import App from '../components/App.jsx';
 import Browser from '../components/Browser.jsx';
+import VenueContainer from '../components/VenueContainer.jsx';
 
 class AppRouter extends Component {
     render() {
-        const { explore } = this.props;
+        const { explore, venues } = this.props;
 
         return (
             <Router history={hashHistory}>
@@ -32,7 +34,12 @@ class AppRouter extends Component {
                         onEnter={explore}
                         onChange={(_, nextState) => explore(nextState)}
                     />
-                    <Route path="/venues/:venueId" component={null} />
+                    <Route
+                        path="/venues/:venueId"
+                        component={VenueContainer}
+                        onEnter={venues}
+                        onChange={(_, nextState) => venues(nextState)}
+                    />
                 </Route>
             </Router>
         );
@@ -42,10 +49,19 @@ class AppRouter extends Component {
 const mapDispatchToProps = dispatch => ({
     explore({ location }) {
         dispatch(hideAllVenues());
-        venues.explore(location.query)
+        venuesApi.explore(location.query)
             .then(pipe(
                 path(['response', 'groups', 0, 'items']),
-                map(prop(['venue'])),
+                map(prop('venue')),
+                addVenues,
+                dispatch
+            ));
+    },
+    venues({ params }) {
+        venuesApi.venues(params.venueId)
+            .then(pipe(
+                path(['response', 'venue']),
+                of(),
                 addVenues,
                 dispatch
             ));

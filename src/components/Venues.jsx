@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import {
     pipe,
@@ -27,7 +28,9 @@ class Venues extends Component {
                             />
                         </div>
                         <div className="media-body">
-                            <h4 className="media-heading">{name}</h4>
+                            <h4 className="media-heading">
+                                <Link to={`/venues/${id}`}>{name}</Link>
+                            </h4>
                             <div>{categories}</div>
                             <div>{location}</div>
                             <div>{hours}</div>
