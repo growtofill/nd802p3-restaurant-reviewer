@@ -36,7 +36,8 @@ const tips = pipe(
                 props(['firstName', 'lastName']),
                 join(' ')
             ),
-        })
+        }),
+        merge({ visibility: 'public' })
     ))
 );
 
@@ -67,3 +68,5 @@ export const addVenues = pipe(
 );
 
 export const hideAllVenues = always({ type: 'HIDE_ALL_VENUES' });
+
+export const addTip = merge({ type: 'ADD_TIP' });

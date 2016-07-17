@@ -4,7 +4,7 @@ import TipList from './TipList.jsx';
 
 export default class Venue extends Component {
     render() {
-        const { name, categories, location, hours, photos, tips } = this.props.venue;
+        const { id, name, categories, location, hours, photos, tips } = this.props.venue;
 
         return (
             <div className="row">
@@ -21,7 +21,7 @@ export default class Venue extends Component {
                     <div>{hours}</div>
                 </div>
                 <div className="col-sm-8">
-                    {tips ? <TipList tips={tips} /> : null}
+                    {tips ? <TipList tips={tips} venueId={id} /> : null}
                 </div>
             </div>
         );

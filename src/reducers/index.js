@@ -5,6 +5,9 @@ import {
     merge,
     map,
     assoc,
+    over,
+    lensPath,
+    append,
 } from 'ramda';
 
 const venues = (state = {}, action) => {
@@ -17,6 +20,12 @@ const venues = (state = {}, action) => {
         case 'HIDE_ALL_VENUES':
             return map(
                 assoc('visible', false),
+                state
+            );
+        case 'ADD_TIP':
+            return over(
+                lensPath([action.venueId, 'tips']),
+                append(action.tip),
                 state
             );
         default:
