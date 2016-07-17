@@ -11,8 +11,8 @@ const venues = (state = {}, action) => {
     switch (action.type) {
         case 'ADD_VENUES':
             return merge(
-                indexBy(prop('id'), action.venues),
-                state
+                state,
+                indexBy(prop('id'), action.venues)
             );
         case 'HIDE_ALL_VENUES':
             return map(

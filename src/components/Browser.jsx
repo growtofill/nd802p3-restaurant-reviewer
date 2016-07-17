@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import Explore from '../components/Explore.jsx';
-import Venues from '../components/Venues.jsx';
+import Explore from './Explore.jsx';
+import VenueList from './VenueList.jsx';
 
 export default class Browser extends Component {
     render() {
@@ -14,7 +14,7 @@ export default class Browser extends Component {
                     <Explore currentLocation={currentLocation} />
                 </div>
                 <div className="col-sm-8">
-                    <Venues />
+                    <VenueList />
                 </div>
             </div>
         );

@@ -16,9 +16,9 @@ import {
     hideAllVenues,
 } from '../actions';
 
-import App from '../components/App.jsx';
-import Browser from '../components/Browser.jsx';
-import VenueContainer from '../components/VenueContainer.jsx';
+import App from './App.jsx';
+import Browser from './Browser.jsx';
+import VenueContainer from './VenueContainer.jsx';
 
 class AppRouter extends Component {
     render() {

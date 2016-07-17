@@ -19,8 +19,25 @@ const categories = pipe(
 
 const photos = pipe(
     path(['groups', 0, 'items', 0]),
-    props(['prefix', 'suffix']),
-    join('64x64')
+    props(['prefix', 'suffix'])
+);
+
+const tips = pipe(
+    path(['groups', 0, 'items']),
+    map(pipe(
+        pick([
+            'id',
+            'text',
+            'user',
+            'createdAt',
+        ]),
+        evolve({
+            user: pipe(
+                props(['firstName', 'lastName']),
+                join(' ')
+            ),
+        })
+    ))
 );
 
 const toPlainVenue = pipe(
@@ -31,12 +48,14 @@ const toPlainVenue = pipe(
         'location',
         'hours',
         'photos',
+        'tips',
     ]),
     evolve({
         categories,
         location: prop(['address']),
         hours: prop(['status']),
         photos,
+        tips,
     }),
     merge({ visible: true })
 );

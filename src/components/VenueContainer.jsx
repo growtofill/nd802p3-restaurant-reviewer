@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Venue from '../components/Venue.jsx';
+import Venue from './Venue.jsx';
 
 class VenueContainer extends Component {
     render() {

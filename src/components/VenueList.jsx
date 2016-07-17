@@ -21,7 +21,7 @@ class Venues extends Component {
                         <div className="media-left">
                             <img
                                 className="media-object"
-                                src={photos}
+                                src={photos.join('64x64')}
                                 alt={name}
                                 width="64"
                                 height="64"
