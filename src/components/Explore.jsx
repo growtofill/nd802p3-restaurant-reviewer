@@ -1,14 +1,39 @@
 import React, { Component } from 'react';
+import {
+    pipe,
+    prop,
+    props,
+    join,
+    objOf,
+} from 'ramda';
 
 class Explore extends Component {
     onSubmit(e) {
         const near = this.refs.locationInput.value;
 
+        if (near) this.pushToRouter({ near });
+        else this.pushCurPosToRouter();
+
+        e.preventDefault();
+    }
+    pushCurPosToRouter() {
+        const queryOf = pipe(
+            prop('coords'),
+            props(['latitude', 'longitude']),
+            join(','),
+            objOf('ll')
+        );
+
+        navigator.geolocation.getCurrentPosition(pipe(
+            queryOf,
+            query => this.pushToRouter(query)
+        ));
+    }
+    pushToRouter(query) {
         this.context.router.push({
             pathname: '/explore',
-            query: { near },
+            query,
         });
-        e.preventDefault();
     }
     render() {
         const { currentLocation } = this.props;
@@ -22,6 +47,7 @@ class Explore extends Component {
                         className="form-control"
                         id="locationInput"
                         ref="locationInput"
+                        placeholder="Near me"
                         defaultValue={currentLocation}
                     />
                 </div>

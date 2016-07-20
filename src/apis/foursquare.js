@@ -4,12 +4,14 @@ const clientSecret = 'ZUQPBMCUEFEC30BG2CFNTE4SSFA1OQLZHZW4NKJCHVIZTEJT';
 const version = '20160618';
 
 export const venues = {
-    explore({ near, section = 'food' }) {
+    explore({ near, ll, section = 'food' }) {
         return fetch(
+            /* eslint-disable prefer-template */
             `${baseUrl}/venues/explore`
+            /* eslint-enable prefer-template */
             + `?client_id=${clientId}`
             + `&client_secret=${clientSecret}`
-            + `&near=${near}`
+            + (near ? `&near=${near}` : `&ll=${ll}`)
             + `&section=${section}`
             + '&venuePhotos=1'
             + `&v=${version}`
