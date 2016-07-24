@@ -10,6 +10,7 @@ import {
     objOf,
     merge,
     always,
+    defaultTo,
 } from 'ramda';
 
 const categories = pipe(
@@ -24,6 +25,7 @@ const photos = pipe(
 
 const tips = pipe(
     path(['groups', 0, 'items']),
+    defaultTo([]),
     map(pipe(
         pick([
             'id',

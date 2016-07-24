@@ -10,7 +10,7 @@ export default class Venue extends Component {
             <div className="row">
                 <div className="col-sm-4">
                     <img
-                        src={photos.join('293x293')}
+                        src={photos ? photos.join('293x293') : null}
                         alt={name}
                         width="293"
                         height="293"

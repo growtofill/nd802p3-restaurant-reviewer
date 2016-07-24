@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 import {
-    prop,
     pipe,
     always,
     path,
-    map,
     of,
 } from 'ramda';
 
@@ -22,17 +20,17 @@ import VenueContainer from './VenueContainer.jsx';
 
 class AppRouter extends Component {
     render() {
-        const { explore, venues } = this.props;
+        const { search, venues } = this.props;
 
         return (
             <Router history={hashHistory}>
                 <Route path="/" component={App}>
                     <IndexRoute component={Browser} />
                     <Route
-                        path="/explore"
+                        path="/search"
                         component={Browser}
-                        onEnter={explore}
-                        onChange={(_, nextState) => explore(nextState)}
+                        onEnter={search}
+                        onChange={(_, nextState) => search(nextState)}
                     />
                     <Route
                         path="/venues/:venueId"
@@ -47,12 +45,11 @@ class AppRouter extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    explore({ location }) {
+    search({ location }) {
         dispatch(hideAllVenues());
-        venuesApi.explore(location.query)
+        venuesApi.search(location.query)
             .then(pipe(
-                path(['response', 'groups', 0, 'items']),
-                map(prop('venue')),
+                path(['response', 'venues']),
                 addVenues,
                 dispatch
             ));

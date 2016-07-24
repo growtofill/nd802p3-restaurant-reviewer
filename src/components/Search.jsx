@@ -7,7 +7,7 @@ import {
     objOf,
 } from 'ramda';
 
-class Explore extends Component {
+class Search extends Component {
     onSubmit(e) {
         const near = this.refs.locationInput.value;
 
@@ -31,7 +31,7 @@ class Explore extends Component {
     }
     pushToRouter(query) {
         this.context.router.push({
-            pathname: '/explore',
+            pathname: '/search',
             query,
         });
     }
@@ -51,14 +51,14 @@ class Explore extends Component {
                         defaultValue={currentLocation}
                     />
                 </div>
-                <button type="submit" className="btn btn-primary">Explore</button>
+                <button type="submit" className="btn btn-primary">Search</button>
             </form>
         );
     }
 }
 
-Explore.contextTypes = {
+Search.contextTypes = {
     router: React.PropTypes.object,
 };
 
-export default Explore;
+export default Search;

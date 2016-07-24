@@ -16,24 +16,14 @@ class Venues extends Component {
 
         return (
             <div>
-                {venues.map(({ id, name, categories, location, hours, photos }) =>
+                {venues.map(({ id, name, categories, location }) =>
                     <div className="media" key={id}>
-                        <div className="media-left">
-                            <img
-                                className="media-object"
-                                src={photos.join('64x64')}
-                                alt={name}
-                                width="64"
-                                height="64"
-                            />
-                        </div>
                         <div className="media-body">
                             <h4 className="media-heading">
                                 <Link to={`/venues/${id}`}>{name}</Link>
                             </h4>
                             <div>{categories}</div>
                             <div>{location}</div>
-                            <div>{hours}</div>
                         </div>
                     </div>
                 )}
