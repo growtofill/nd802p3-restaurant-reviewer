@@ -33,6 +33,16 @@ const venues = (state = {}, action) => {
     }
 };
 
+const category = (state = { categories: [] }, action) => {
+    switch (action.type) {
+        case 'SET_CATEGORY':
+            return action.category;
+        default:
+            return state;
+    }
+};
+
 export default combineReducers({
     venues,
+    category,
 });

@@ -28,4 +28,13 @@ export const venues = {
             + '&m=foursquare'
         ).then(res => res.json());
     },
+    categories() {
+        return fetch(
+            `${baseUrl}/venues/categories`
+            + `?client_id=${clientId}`
+            + `&client_secret=${clientSecret}`
+            + `&v=${version}`
+            + '&m=foursquare'
+        ).then(res => res.json());
+    },
 };

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
     pipe,
     prop,
@@ -6,15 +7,17 @@ import {
     join,
     objOf,
     merge,
+    pick,
 } from 'ramda';
 
 class Search extends Component {
     onSubmit(e) {
-        const near = this.refs.locationInput.value.trim();
-        const query = this.refs.nameInput.value.trim();
+        const near = this.refs.near.value.trim();
+        const query = this.refs.query.value.trim();
+        const categoryId = this.refs.categoryId.value;
 
-        if (near) this.pushToRouter({ near, query });
-        else this.pushCurPosToRouter({ query });
+        if (near) this.pushToRouter({ near, query, categoryId });
+        else this.pushCurPosToRouter({ query, categoryId });
 
         e.preventDefault();
     }
@@ -40,31 +43,47 @@ class Search extends Component {
     }
     render() {
         const {
-            currentLocation,
-            currentName,
+            currentQuery,
+            currentNear,
+            currentCategoryId,
+            category,
         } = this.props;
 
         return (
             <form onSubmit={e => this.onSubmit(e)}>
                 <div className="form-group">
-                    <label htmlFor="locationInput">Name</label>
+                    <label htmlFor="query">Name</label>
                     <input
                         type="text"
                         className="form-control"
-                        id="nameInput"
-                        ref="nameInput"
-                        defaultValue={currentName}
+                        id="query"
+                        ref="query"
+                        defaultValue={currentQuery}
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="locationInput">Location</label>
+                    <label htmlFor="categoryId">Cousine</label>
+                    <select
+                        id="categoryId"
+                        ref="categoryId"
+                        className="form-control"
+                        defaultValue={currentCategoryId}
+                    >
+                        <option value={category.id}>Any</option>
+                        {category.categories.map(({ id, shortName }) =>
+                            <option key={id} value={id}>{shortName}</option>
+                        )}
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="near">Location</label>
                     <input
                         type="text"
                         className="form-control"
-                        id="locationInput"
-                        ref="locationInput"
+                        id="near"
+                        ref="near"
                         placeholder="Near me"
-                        defaultValue={currentLocation}
+                        defaultValue={currentNear}
                     />
                 </div>
                 <button type="submit" className="btn btn-primary">Search</button>
@@ -77,4 +96,4 @@ Search.contextTypes = {
     router: React.PropTypes.object,
 };
 
-export default Search;
+export default connect(pick(['category']))(Search);

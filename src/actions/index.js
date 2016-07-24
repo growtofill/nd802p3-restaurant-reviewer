@@ -72,3 +72,9 @@ export const addVenues = pipe(
 export const hideAllVenues = always({ type: 'HIDE_ALL_VENUES' });
 
 export const addTip = merge({ type: 'ADD_TIP' });
+
+export const setCategory = pipe(
+    pick(['id', 'shortName', 'categories']),
+    objOf('category'),
+    merge({ type: 'SET_CATEGORY' })
+);

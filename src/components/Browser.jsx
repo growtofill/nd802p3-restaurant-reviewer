@@ -6,12 +6,20 @@ import VenueList from './VenueList.jsx';
 export default class Browser extends Component {
     render() {
         const { pathname, query } = this.props.location;
-        const currentLocation = pathname === '/search' ? query.near : null;
+        const {
+            query: searchQuery,
+            categoryId,
+            near,
+        } = pathname === '/search' ? query : {};
 
         return (
             <div className="row">
                 <div className="col-sm-4">
-                    <Search currentLocation={currentLocation} />
+                    <Search
+                        currentQuery={searchQuery}
+                        currentCategoryId={categoryId}
+                        currentNear={near}
+                    />
                 </div>
                 <div className="col-sm-8">
                     <VenueList />

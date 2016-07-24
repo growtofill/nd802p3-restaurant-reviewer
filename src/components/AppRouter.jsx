@@ -6,12 +6,15 @@ import {
     always,
     path,
     of,
+    propEq,
+    find,
 } from 'ramda';
 
 import { venues as venuesApi } from '../apis/foursquare';
 import {
     addVenues,
     hideAllVenues,
+    setCategory,
 } from '../actions';
 
 import App from './App.jsx';
@@ -20,11 +23,11 @@ import VenueContainer from './VenueContainer.jsx';
 
 class AppRouter extends Component {
     render() {
-        const { search, venues } = this.props;
+        const { search, venues, categories } = this.props;
 
         return (
             <Router history={hashHistory}>
-                <Route path="/" component={App}>
+                <Route path="/" component={App} onEnter={categories}>
                     <IndexRoute component={Browser} />
                     <Route
                         path="/search"
@@ -60,6 +63,15 @@ const mapDispatchToProps = dispatch => ({
                 path(['response', 'venue']),
                 of(),
                 addVenues,
+                dispatch
+            ));
+    },
+    categories() {
+        venuesApi.categories()
+            .then(pipe(
+                path(['response', 'categories']),
+                find(propEq('name', 'Food')),
+                setCategory,
                 dispatch
             ));
     },
