@@ -5,18 +5,20 @@ import {
     props,
     join,
     objOf,
+    merge,
 } from 'ramda';
 
 class Search extends Component {
     onSubmit(e) {
-        const near = this.refs.locationInput.value;
+        const near = this.refs.locationInput.value.trim();
+        const query = this.refs.nameInput.value.trim();
 
-        if (near) this.pushToRouter({ near });
-        else this.pushCurPosToRouter();
+        if (near) this.pushToRouter({ near, query });
+        else this.pushCurPosToRouter({ query });
 
         e.preventDefault();
     }
-    pushCurPosToRouter() {
+    pushCurPosToRouter(baseQuery) {
         const queryOf = pipe(
             prop('coords'),
             props(['latitude', 'longitude']),
@@ -26,6 +28,7 @@ class Search extends Component {
 
         navigator.geolocation.getCurrentPosition(pipe(
             queryOf,
+            merge(baseQuery),
             query => this.pushToRouter(query)
         ));
     }
@@ -36,10 +39,23 @@ class Search extends Component {
         });
     }
     render() {
-        const { currentLocation } = this.props;
+        const {
+            currentLocation,
+            currentName,
+        } = this.props;
 
         return (
             <form onSubmit={e => this.onSubmit(e)}>
+                <div className="form-group">
+                    <label htmlFor="locationInput">Name</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="nameInput"
+                        ref="nameInput"
+                        defaultValue={currentName}
+                    />
+                </div>
                 <div className="form-group">
                     <label htmlFor="locationInput">Location</label>
                     <input

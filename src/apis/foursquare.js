@@ -4,16 +4,16 @@ const clientSecret = 'ZUQPBMCUEFEC30BG2CFNTE4SSFA1OQLZHZW4NKJCHVIZTEJT';
 const version = '20160618';
 
 export const venues = {
-    search({ near, ll, categoryId = '4d4b7105d754a06374d81259' }) {
+    search({ query, categoryId = '4d4b7105d754a06374d81259', near, ll }) {
         return fetch(
             /* eslint-disable prefer-template */
             `${baseUrl}/venues/search`
             /* eslint-enable prefer-template */
             + `?client_id=${clientId}`
             + `&client_secret=${clientSecret}`
+            + (query ? `&query=${query}` : '')
             + (near ? `&near=${near}` : `&ll=${ll}`)
             + `&categoryId=${categoryId}`
-            + '&venuePhotos=1'
             + `&v=${version}`
             + '&m=foursquare'
         ).then(res => res.json());
