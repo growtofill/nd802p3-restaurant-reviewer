@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import {
     pipe,
     prop,
@@ -7,10 +6,9 @@ import {
     join,
     objOf,
     merge,
-    pick,
 } from 'ramda';
 
-class Search extends Component {
+export default class Search extends Component {
     onSubmit(e) {
         const near = this.refs.near.value.trim();
         const query = this.refs.query.value.trim();
@@ -95,5 +93,3 @@ class Search extends Component {
 Search.contextTypes = {
     router: React.PropTypes.object,
 };
-
-export default connect(pick(['category']))(Search);

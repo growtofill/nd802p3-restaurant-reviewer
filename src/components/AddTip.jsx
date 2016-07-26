@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import moment from 'moment';
-import {
-    pipe,
-    always,
-} from 'ramda';
 
-import { addTip } from '../actions';
-
-class AddTip extends Component {
+export default class AddTip extends Component {
     onSubmit(e) {
         const { venueId } = this.props;
         const tip = {
@@ -38,12 +31,3 @@ class AddTip extends Component {
         );
     }
 }
-
-const mapDispatchToProps = dispatch => ({
-    onAddTip: pipe(
-        addTip,
-        dispatch
-    ),
-});
-
-export default connect(always({}), mapDispatchToProps)(AddTip);

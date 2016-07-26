@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
-import AddTip from './AddTip.jsx';
+import AddTip from '../containers/AddTip';
 
 const newestFirst = (a, b) => b.createdAt - a.createdAt;
 

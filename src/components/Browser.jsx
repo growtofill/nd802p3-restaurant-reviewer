@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import Search from './Search.jsx';
-import VenueList from './VenueList.jsx';
+import Search from '../containers/Search';
+import VenueList from '../containers/VenueList';
 
 export default class Browser extends Component {
     render() {

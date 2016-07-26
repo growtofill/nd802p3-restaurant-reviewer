@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import { Component, createElement } from 'react';
 import { connect } from 'react-redux';
 
-import Venue from './Venue.jsx';
+import Venue from '../components/Venue.jsx';
 
 class VenueContainer extends Component {
     render() {
         const { venue } = this.props;
 
-        return venue ? <Venue venue={venue} /> : null;
+        return venue ? createElement(Venue, { venue }) : null;
     }
 }
 

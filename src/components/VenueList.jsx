@@ -1,16 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { connect } from 'react-redux';
-import {
-    pipe,
-    pick,
-    evolve,
-    values,
-    filter,
-    prop,
-} from 'ramda';
 
-class Venues extends Component {
+export default class Venues extends Component {
     render() {
         const { venues } = this.props;
 
@@ -31,15 +22,3 @@ class Venues extends Component {
         );
     }
 }
-
-const mapStateToProps = pipe(
-    pick(['venues']),
-    evolve({
-        venues: pipe(
-            filter(prop('visible')),
-            values
-        ),
-    })
-);
-
-export default connect(mapStateToProps)(Venues);

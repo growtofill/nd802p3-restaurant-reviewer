@@ -2,7 +2,7 @@ import { createElement } from 'react';
 import { render } from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import AppRouter from './components/AppRouter.jsx';
+import AppRouter from './containers/AppRouter';
 import reviewerApp from './reducers';
 
 const store = createStore(reviewerApp);
