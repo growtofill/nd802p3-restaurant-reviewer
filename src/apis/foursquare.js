@@ -23,7 +23,6 @@ export const venues = {
             `${baseUrl}/venues/${venueId}`
             + `?client_id=${clientId}`
             + `&client_secret=${clientSecret}`
-            + '&venuePhotos=1'
             + `&v=${version}`
             + '&m=foursquare'
         ).then(res => res.json());

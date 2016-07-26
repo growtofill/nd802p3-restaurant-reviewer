@@ -15,7 +15,7 @@ class Venues extends Component {
         const { venues } = this.props;
 
         return (
-            <div>
+            <div className="venue-list">
                 {venues.map(({ id, name, categories, location }) =>
                     <div className="media" key={id}>
                         <div className="media-body">

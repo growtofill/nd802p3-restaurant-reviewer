@@ -50,7 +50,7 @@ class Search extends Component {
         } = this.props;
 
         return (
-            <form onSubmit={e => this.onSubmit(e)}>
+            <form className="search" onSubmit={e => this.onSubmit(e)}>
                 <div className="form-group">
                     <label htmlFor="query">Name</label>
                     <input

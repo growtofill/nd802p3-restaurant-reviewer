@@ -11,6 +11,7 @@ import {
     merge,
     always,
     defaultTo,
+    pathOr,
 } from 'ramda';
 
 const categories = pipe(
@@ -19,8 +20,8 @@ const categories = pipe(
 );
 
 const photos = pipe(
-    path(['groups', 0, 'items', 0]),
-    props(['prefix', 'suffix'])
+    pathOr([], ['groups', 0, 'items']),
+    map(props(['prefix', 'suffix']))
 );
 
 const tips = pipe(
