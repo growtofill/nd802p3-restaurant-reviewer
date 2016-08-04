@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import App from './App.jsx';
 import Browser from './Browser.jsx';
 import Venue from '../containers/Venue';
+import Welcome from './Welcome.jsx';
 
 export default class AppRouter extends Component {
     render() {
@@ -12,7 +13,7 @@ export default class AppRouter extends Component {
         return (
             <Router history={hashHistory}>
                 <Route path="/" component={App} onEnter={categories}>
-                    <IndexRoute component={Browser} />
+                    <IndexRoute component={Welcome} />
                     <Route
                         path="/search"
                         component={Browser}

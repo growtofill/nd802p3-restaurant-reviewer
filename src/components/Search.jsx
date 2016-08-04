@@ -84,7 +84,7 @@ export default class Search extends Component {
                         defaultValue={currentNear}
                     />
                 </div>
-                <button type="submit" className="btn btn-primary">Search</button>
+                <button type="submit" className="btn btn-default">Search</button>
             </form>
         );
     }
