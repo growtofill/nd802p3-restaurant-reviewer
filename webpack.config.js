@@ -1,6 +1,10 @@
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
+const { dependencies: deps } = require('./package.json');
+
+const excludedDeps = ['bootstrap'];
+const vendor = Object.keys(deps).filter(dep => !excludedDeps.includes(dep));
 
 let plugins = [
     new CommonsChunkPlugin({
@@ -27,13 +31,7 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
     entry: {
         app: './src',
-        vendor: [
-            'ramda',
-            'react',
-            'react-dom',
-            'react-redux',
-            'redux',
-        ],
+        vendor,
     },
     output: {
         filename: '[name].bundle.js',
