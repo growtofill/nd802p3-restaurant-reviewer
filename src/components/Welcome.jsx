@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
-const defaultCity = 'Kyiv';
+const defaultLocation = 'Kyiv';
 
 export default class Welcome extends Component {
     onSubmit(e) {
-        const near = this.refs.city.value.trim() || defaultCity;
+        const location = this.refs.location.value.trim() || defaultLocation;
 
-        this.pushToRouter({ near });
+        this.pushToRouter(location);
         e.preventDefault();
     }
-    pushToRouter(query) {
-        this.context.router.push({
-            pathname: '/search',
-            query,
-        });
+    pushToRouter(location) {
+        const pathname = `/locations/${location}`;
+        this.context.router.push({ pathname });
     }
     render() {
         return (
@@ -29,8 +27,8 @@ export default class Welcome extends Component {
                             className="form-control"
                             type="text"
                             id="formGroupInputLarge"
-                            ref="city"
-                            placeholder={defaultCity}
+                            ref="location"
+                            placeholder={defaultLocation}
                         />
                     </div>
                     <div className="col-sm-3 col-md-4">

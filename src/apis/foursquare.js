@@ -18,6 +18,19 @@ export const venues = {
             + '&m=foursquare'
         ).then(res => res.json());
     },
+    explore({ near, ll }) {
+        return fetch(
+            /* eslint-disable prefer-template */
+            `${baseUrl}/venues/explore`
+            /* eslint-enable prefer-template */
+            + `?client_id=${clientId}`
+            + `&client_secret=${clientSecret}`
+            + (near ? `&near=${near}` : `&ll=${ll}`)
+            + '&section=food'
+            + `&v=${version}`
+            + '&m=foursquare'
+        ).then(res => res.json());
+    },
     venues(venueId) {
         return fetch(
             `${baseUrl}/venues/${venueId}`

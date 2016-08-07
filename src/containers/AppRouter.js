@@ -4,27 +4,33 @@ import {
     always,
     path,
     of,
-    propEq,
-    find,
+    map,
+    prop,
 } from 'ramda';
 
 import AppRouter from '../components/AppRouter.jsx';
 import { venues as venuesApi } from '../apis/foursquare';
-import {
-    addVenues,
-    hideAllVenues,
-    setCategory,
-} from '../actions';
+import { addVenues } from '../actions/venues';
+import { addCategories } from '../actions/categories';
 
 const mapDispatchToProps = dispatch => ({
-    search({ location }) {
-        dispatch(hideAllVenues());
-        venuesApi.search(location.query)
-            .then(pipe(
-                path(['response', 'venues']),
-                addVenues,
-                dispatch
-            ));
+    search({ params }) {
+        venuesApi.explore({ near: params.location })
+            .then(data => {
+                const { items } = data.response.groups[0];
+
+                pipe(
+                    map(prop('venue')),
+                    addVenues,
+                    dispatch
+                )(items);
+
+                pipe(
+                    map(path(['venue', 'categories'])),
+                    addCategories,
+                    dispatch
+                )(items);
+            });
     },
     venues({ params }) {
         venuesApi.venues(params.venueId)
@@ -32,15 +38,6 @@ const mapDispatchToProps = dispatch => ({
                 path(['response', 'venue']),
                 of(),
                 addVenues,
-                dispatch
-            ));
-    },
-    categories() {
-        venuesApi.categories()
-            .then(pipe(
-                path(['response', 'categories']),
-                find(propEq('name', 'Food')),
-                setCategory,
                 dispatch
             ));
     },

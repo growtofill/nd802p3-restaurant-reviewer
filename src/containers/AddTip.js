@@ -4,7 +4,7 @@ import {
     always,
 } from 'ramda';
 
-import { addTip } from '../actions';
+import { addTip } from '../actions/venues';
 import AddTip from '../components/AddTip.jsx';
 
 const mapDispatchToProps = dispatch => ({

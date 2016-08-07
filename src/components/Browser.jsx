@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Search from '../containers/Search';
+import Filter from '../containers/Filter';
 import VenueList from '../containers/VenueList';
 
 export default class Browser extends Component {
@@ -15,7 +15,7 @@ export default class Browser extends Component {
         return (
             <div className="row">
                 <div className="col-sm-4">
-                    <Search
+                    <Filter
                         currentQuery={searchQuery}
                         currentCategoryId={categoryId}
                         currentNear={near}

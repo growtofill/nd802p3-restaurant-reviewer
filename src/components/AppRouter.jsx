@@ -15,7 +15,7 @@ export default class AppRouter extends Component {
                 <Route path="/" component={App} onEnter={categories}>
                     <IndexRoute component={Welcome} />
                     <Route
-                        path="/search"
+                        path="/locations/:location"
                         component={Browser}
                         onEnter={search}
                         onChange={(_, nextState) => search(nextState)}
