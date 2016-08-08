@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { values } from 'ramda';
 
 export default class Venues extends Component {
     render() {
@@ -7,7 +8,7 @@ export default class Venues extends Component {
 
         return (
             <div className="venue-list">
-                {venues.map(({ id, name, categories, location }) =>
+                {values(venues).map(({ id, name, categories, location }) =>
                     <div className="media" key={id}>
                         <div className="media-body">
                             <h4 className="media-heading">

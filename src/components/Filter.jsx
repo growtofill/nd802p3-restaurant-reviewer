@@ -1,49 +1,18 @@
 import React, { Component } from 'react';
-import {
-    pipe,
-    prop,
-    props,
-    join,
-    objOf,
-    merge,
-    toPairs,
-} from 'ramda';
 
 export default class Filter extends Component {
     onSubmit(e) {
-        const near = this.refs.near.value.trim();
-        const query = this.refs.query.value.trim();
-        const categoryId = this.refs.categoryId.value;
+        const location = this.refs.near.value.trim();
+        const name = this.refs.query.value.trim();
+        const categories = this.refs.categoryId.value;
 
-        if (near) this.pushToRouter({ near, query, categoryId });
-        else this.pushCurPosToRouter({ query, categoryId });
+        this.props.onFilter({ name, location, categories });
 
         e.preventDefault();
     }
-    pushCurPosToRouter(baseQuery) {
-        const queryOf = pipe(
-            prop('coords'),
-            props(['latitude', 'longitude']),
-            join(','),
-            objOf('ll')
-        );
-
-        navigator.geolocation.getCurrentPosition(pipe(
-            queryOf,
-            merge(baseQuery),
-            query => this.pushToRouter(query)
-        ));
-    }
-    pushToRouter(query) {
-        this.context.router.push({
-            query,
-        });
-    }
     render() {
         const {
-            currentQuery,
-            currentNear,
-            currentCategoryId,
+            query,
             categories,
         } = this.props;
 
@@ -56,7 +25,7 @@ export default class Filter extends Component {
                         className="form-control"
                         id="query"
                         ref="query"
-                        defaultValue={currentQuery}
+                        defaultValue={query.name}
                     />
                 </div>
                 <div className="form-group">
@@ -65,11 +34,11 @@ export default class Filter extends Component {
                         id="categoryId"
                         ref="categoryId"
                         className="form-control"
-                        defaultValue={currentCategoryId}
+                        defaultValue={query.category}
                     >
                         <option value="">Any</option>
-                        {toPairs(categories).map(([id, name]) =>
-                            <option key={id} value={id}>{name}</option>
+                        {categories.map(({ id, shortName }) =>
+                            <option key={id} value={shortName}>{shortName}</option>
                         )}
                     </select>
                 </div>
@@ -80,8 +49,7 @@ export default class Filter extends Component {
                         className="form-control"
                         id="near"
                         ref="near"
-                        placeholder="Near me"
-                        defaultValue={currentNear}
+                        defaultValue={query.address}
                     />
                 </div>
                 <button type="submit" className="btn btn-default">Filter</button>
@@ -89,7 +57,3 @@ export default class Filter extends Component {
         );
     }
 }
-
-Filter.contextTypes = {
-    router: React.PropTypes.object,
-};

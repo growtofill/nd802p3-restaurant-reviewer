@@ -3,8 +3,7 @@ import {
     flatten,
     uniq,
     map,
-    props,
-    fromPairs,
+    pick,
     objOf,
     merge,
 } from 'ramda';
@@ -12,8 +11,7 @@ import {
 export const addCategories = pipe(
     flatten,
     uniq,
-    map(props(['id', 'name'])),
-    fromPairs,
+    map(pick(['id', 'shortName'])),
     objOf('categories'),
     merge({ type: 'ADD_CATEGORIES' })
 );
