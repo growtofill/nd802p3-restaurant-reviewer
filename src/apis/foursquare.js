@@ -27,6 +27,7 @@ export const venues = {
             + `&client_secret=${clientSecret}`
             + (near ? `&near=${near}` : `&ll=${ll}`)
             + '&section=food'
+            + '&venuePhotos=1'
             + `&v=${version}`
             + '&m=foursquare'
         ).then(res => res.json());

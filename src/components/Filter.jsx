@@ -29,12 +29,12 @@ export default class Filter extends Component {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="categoryId">Cousine</label>
+                    <label htmlFor="categoryId">Categories</label>
                     <select
                         id="categoryId"
                         ref="categoryId"
                         className="form-control"
-                        defaultValue={query.category}
+                        defaultValue={query.categories}
                     >
                         <option value="">Any</option>
                         {categories.map(({ id, shortName }) =>
