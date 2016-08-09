@@ -11,6 +11,8 @@ export default function categories(state = [], action) {
                 concat(action.categories),
                 uniq
             )(state);
+        case 'REMOVE_CATEGORIES':
+            return [];
         default:
             return state;
     }

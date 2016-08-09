@@ -15,3 +15,5 @@ export const addCategories = pipe(
     objOf('categories'),
     merge({ type: 'ADD_CATEGORIES' })
 );
+
+export const removeCategories = () => ({ type: 'REMOVE_CATEGORIES' });

@@ -10,8 +10,8 @@ import {
 
 import AppRouter from '../components/AppRouter.jsx';
 import { venues as venuesApi } from '../apis/foursquare';
-import { addVenues } from '../actions/venues';
-import { addCategories } from '../actions/categories';
+import { addVenues, removeVenues } from '../actions/venues';
+import { addCategories, removeCategories } from '../actions/categories';
 
 const mapDispatchToProps = dispatch => ({
     search({ params }) {
@@ -40,6 +40,10 @@ const mapDispatchToProps = dispatch => ({
                 addVenues,
                 dispatch
             ));
+    },
+    reset() {
+        dispatch(removeCategories());
+        dispatch(removeVenues());
     },
 });
 

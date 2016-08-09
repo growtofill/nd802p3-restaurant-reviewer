@@ -69,4 +69,6 @@ export const addVenues = pipe(
     merge({ type: 'ADD_VENUES' })
 );
 
+export const removeVenues = () => ({ type: 'REMOVE_VENUES' });
+
 export const addTip = merge({ type: 'ADD_TIP' });

@@ -2,8 +2,6 @@ import {
     indexBy,
     prop,
     merge,
-    map,
-    assoc,
     over,
     lensPath,
     append,
@@ -16,11 +14,8 @@ export default function venues(state = {}, action) {
                 state,
                 indexBy(prop('id'), action.venues)
             );
-        case 'HIDE_ALL_VENUES':
-            return map(
-                assoc('visible', false),
-                state
-            );
+        case 'REMOVE_VENUES':
+            return {};
         case 'ADD_TIP':
             return over(
                 lensPath([action.venueId, 'tips']),

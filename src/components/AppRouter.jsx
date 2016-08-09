@@ -8,12 +8,12 @@ import Welcome from './Welcome.jsx';
 
 export default class AppRouter extends Component {
     render() {
-        const { search, venues, categories } = this.props;
+        const { search, venues, categories, reset } = this.props;
 
         return (
             <Router history={hashHistory}>
                 <Route path="/" component={App} onEnter={categories}>
-                    <IndexRoute component={Welcome} />
+                    <IndexRoute component={Welcome} onEnter={reset} />
                     <Route
                         path="/locations/:location"
                         component={Browser}
