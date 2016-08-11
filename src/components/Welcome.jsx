@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
-const defaultLocation = 'Kyiv';
 
 export default class Welcome extends Component {
+    componentDidMount() {
+        this.refs.location.focus();
+    }
     onSubmit(e) {
-        const location = this.refs.location.value.trim() || defaultLocation;
-
-        this.pushToRouter(location);
+        const location = this.refs.location.value.trim();
+        this.setLocation(location);
         e.preventDefault();
     }
-    pushToRouter(location) {
+    setLocation(location) {
         const pathname = `/locations/${location}`;
         this.context.router.push({ pathname });
+        this.props.setLocation(location);
     }
     render() {
+        const { location } = this.props;
+
         return (
             <form className="form-horizontal" onSubmit={e => this.onSubmit(e)}>
                 <div className="form-group form-group-lg">
@@ -28,7 +32,8 @@ export default class Welcome extends Component {
                             type="text"
                             id="formGroupInputLarge"
                             ref="location"
-                            placeholder={defaultLocation}
+                            defaultValue={location}
+                            required
                         />
                     </div>
                     <div className="col-sm-3 col-md-4">

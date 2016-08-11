@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import {
     pipe,
-    always,
+    pick,
     path,
     of,
     map,
@@ -47,4 +47,4 @@ const mapDispatchToProps = dispatch => ({
     },
 });
 
-export default connect(always({}), mapDispatchToProps)(AppRouter);
+export default connect(pick(['location']), mapDispatchToProps)(AppRouter);

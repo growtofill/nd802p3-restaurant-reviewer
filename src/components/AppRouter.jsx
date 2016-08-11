@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, IndexRedirect, hashHistory } from 'react-router';
 
-import App from './App.jsx';
+import App from '../containers/App';
 import Browser from './Browser.jsx';
 import Venue from '../containers/Venue';
-import Welcome from './Welcome.jsx';
+import Welcome from '../containers/Welcome';
 
 export default class AppRouter extends Component {
     render() {
-        const { search, venues, categories, reset } = this.props;
+        const { search, venues, categories, reset, location } = this.props;
 
         return (
             <Router history={hashHistory}>
                 <Route path="/" component={App} onEnter={categories}>
-                    <IndexRoute component={Welcome} onEnter={reset} />
+                    <IndexRedirect to={`/locations/${location}`} />
+                    <Route
+                        path="/settings"
+                        component={Welcome}
+                        onEnter={reset}
+                    />
                     <Route
                         path="/locations/:location"
                         component={Browser}
