@@ -8,7 +8,7 @@
     "build:dev": "gulp",
     "watch": "gulp watch",
     "lint": "eslint src/**/*.{js,jsx}",
-    "server": "static dist"
+    "server": "static dist -a 0.0.0.0"
   },
   "keywords": [],
   "author": "Pavlo Mykhalov <pmykhalov@gmail.com>",
@@ -38,6 +38,7 @@
     "react-dom": "15.1.0",
     "react-redux": "4.4.5",
     "react-router": "2.5.2",
-    "redux": "3.5.2"
+    "redux": "3.5.2",
+    "whatwg-fetch": "^1.0.0"
   }
 }
