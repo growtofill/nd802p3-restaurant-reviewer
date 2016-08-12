@@ -9,7 +9,11 @@ export default class App extends Component {
             <div>
                 <div className="navbar navbar-default">
                     <div className="container">
-                        <div className="navbar-brand">Restaurant Reviewer</div>
+                        <div className="navbar-brand">
+                            <Link to={`/locations/${location}`}>
+                                Restaurant Reviewer
+                            </Link>
+                        </div>
                         <div className="navbar-text navbar-right">
                             <Link to="/settings">{location}</Link>
                         </div>
