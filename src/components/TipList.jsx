@@ -12,20 +12,22 @@ export default class TipList extends Component {
         return (
             <div>
                 <AddTip venueId={venueId} />
-                {tips.sort(newestFirst).map(({ id, text, user, createdAt, visibility }) =>
-                    <div className="media" key={id}>
-                        <div className="media-body">
-                            <h4 className="media-heading">{user}</h4>
-                            <div>
-                                <small>
-                                    {moment.unix(createdAt).format('MMMM D, YYYY')}
-                                    {visibility === 'private' ? ' · Private' : null}
-                                </small>
+                <ul className="tip-list">
+                    {tips.sort(newestFirst).map(({ id, text, user, createdAt, visibility }) =>
+                        <li className="media tip-list-item" key={id}>
+                            <div className="media-body">
+                                <h4 className="media-heading">{user}</h4>
+                                <div>
+                                    <small>
+                                        {moment.unix(createdAt).format('MMMM D, YYYY')}
+                                        {visibility === 'private' ? ' · Private' : null}
+                                    </small>
+                                </div>
+                                <div>{text}</div>
                             </div>
-                            <div>{text}</div>
-                        </div>
-                    </div>
-                )}
+                        </li>
+                    )}
+                </ul>
             </div>
         );
     }

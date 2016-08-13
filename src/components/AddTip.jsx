@@ -17,14 +17,26 @@ export default class AddTip extends Component {
     }
     render() {
         return (
-            <form ref="root" onSubmit={e => this.onSubmit(e)}>
+            <form className="form" ref="root" onSubmit={e => this.onSubmit(e)}>
                 <div className="form-group">
-                    <label>Review</label>
-                    <textarea ref="text" className="form-control" row="3" required />
+                    <label htmlFor="review">Review</label>
+                    <textarea
+                        id="review"
+                        ref="text"
+                        className="form-control"
+                        row="3"
+                        required
+                    />
                 </div>
                 <div className="form-group">
-                    <label>Author</label>
-                    <input ref="user" type="text" className="form-control" required />
+                    <label htmlFor="user">Author</label>
+                    <input
+                        id="user"
+                        ref="user"
+                        type="text"
+                        className="form-control"
+                        required
+                    />
                 </div>
                 <button type="submit" className="btn btn-default">Submit</button>
             </form>

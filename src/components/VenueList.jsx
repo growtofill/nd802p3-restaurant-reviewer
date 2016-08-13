@@ -7,7 +7,7 @@ export default class Venues extends Component {
         const { venues } = this.props;
 
         return (
-            <div className="venue-list">
+            <ul className="venue-list">
                 {values(venues).map(({
                     id,
                     name,
@@ -16,7 +16,7 @@ export default class Venues extends Component {
                     photos,
                     hours,
                 }) =>
-                    <div className="media" key={id}>
+                    <li className="media venue-list-item" key={id}>
                         <div className="media-left">
                             <Link to={`/venues/${id}`}>
                                 <img
@@ -36,9 +36,9 @@ export default class Venues extends Component {
                             <div>{location}</div>
                             <div>{hours}</div>
                         </div>
-                    </div>
+                    </li>
                 )}
-            </div>
+            </ul>
         );
     }
 }

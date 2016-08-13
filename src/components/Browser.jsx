@@ -17,15 +17,15 @@ export default class Browser extends Component {
 
         return (
             <div className="row">
-                <div className="col-sm-4">
+                <aside className="col-sm-4">
                     <Filter
                         query={query}
                         onFilter={filterQuery => this.onFilter(filterQuery)}
                     />
-                </div>
-                <div className="col-sm-8">
+                </aside>
+                <main className="col-sm-8">
                     <VenueList query={query} />
-                </div>
+                </main>
             </div>
         );
     }

@@ -1,0 +1,9 @@
+.navbar a {
+    color: #fff;
+    border-bottom: thin dashed;
+}
+
+.navbar a:hover {
+    text-decoration: none;
+    border-bottom-style: solid;
+}

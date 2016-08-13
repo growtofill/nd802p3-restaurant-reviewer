@@ -2,6 +2,8 @@
 
 @import "./base.css";
 @import "./gallery.css";
-@import "./search.css";
+@import "./form.css";
 @import "./venue-list.css";
 @import "./welcome.css";
+@import "./navbar.css";
+@import "./tip-list.css";

@@ -7,9 +7,13 @@ export default class App extends Component {
 
         return (
             <div>
-                <div className="navbar navbar-default">
+                <header className="navbar bg-primary">
                     <div className="container">
-                        <div className="navbar-brand">
+                        <div
+                            className="navbar-brand"
+                            role="heading"
+                            aria-level="1"
+                        >
                             <Link to={`/locations/${location}`}>
                                 Restaurant Reviewer
                             </Link>
@@ -18,7 +22,7 @@ export default class App extends Component {
                             <Link to="/settings">{location}</Link>
                         </div>
                     </div>
-                </div>
+                </header>
                 <div className="container">
                     {children}
                 </div>
