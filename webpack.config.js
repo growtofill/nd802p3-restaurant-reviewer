@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'production') {
             },
         }),
         new DefinePlugin({
-            'process.env.NODE_ENV': 'production',
+            'process.env.NODE_ENV': '"production"',
         }),
     ]);
     devtool = null;
