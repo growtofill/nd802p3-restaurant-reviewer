@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 
 import AddTip from '../containers/AddTip';
+import Rate from './Rate.jsx';
 
 const newestFirst = (a, b) => b.createdAt - a.createdAt;
 
@@ -20,7 +21,13 @@ export default class TipList extends Component {
                                 <div>
                                     <small>
                                         {moment.unix(createdAt).format('MMMM D, YYYY')}
-                                        {visibility === 'private' ? ' · Private' : null}
+                                        {' '}
+                                        <Rate
+                                            label="Rating"
+                                            value={parseInt(id, 16) % 5 + 1}
+                                            readOnly
+                                        />
+                                        {visibility === 'private' ? ' Private' : null}
                                     </small>
                                 </div>
                                 <div>{text}</div>

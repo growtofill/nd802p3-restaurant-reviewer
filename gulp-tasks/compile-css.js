@@ -4,6 +4,6 @@ import cleanCss from 'gulp-clean-css';
 
 export default () =>
     src('src/styles/index.css')
-        .pipe(concatCss('app.bundle.css'))
-        .pipe(cleanCss())
+        .pipe(concatCss('app.bundle.css', { rebaseUrls: false }))
+        .pipe(cleanCss({ rebase: false }))
         .pipe(dest('dist'));
