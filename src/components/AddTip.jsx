@@ -1,18 +1,27 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
+import Rate from './Rate.jsx';
+
 export default class AddTip extends Component {
+    componentDidMount() {
+        const { root, rating } = this.refs;
+        root.addEventListener('reset', () => rating.reset());
+    }
     onSubmit(e) {
-        const { venueId } = this.props;
+        const { venueId, onAddTip } = this.props;
+        const { text, user, rating, root } = this.refs;
         const tip = {
-            text: this.refs.text.value,
-            user: this.refs.user.value,
+            text: text.value,
+            user: user.value,
             createdAt: moment().unix(),
             visibility: 'private',
+            rating: rating.value,
         };
-        this.props.onAddTip({ tip, venueId });
 
-        this.refs.root.reset();
+        onAddTip({ tip, venueId });
+
+        root.reset();
         e.preventDefault();
     }
     render() {
@@ -27,6 +36,12 @@ export default class AddTip extends Component {
                         row="3"
                         required
                     />
+                </div>
+                <div className="form-group">
+                    <label id="rating">Rating</label>
+                    <div>
+                        <Rate ref="rating" labeledBy="rating" />
+                    </div>
                 </div>
                 <div className="form-group">
                     <label htmlFor="user">Author</label>

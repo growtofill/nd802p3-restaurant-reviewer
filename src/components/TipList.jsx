@@ -14,7 +14,14 @@ export default class TipList extends Component {
             <div>
                 <AddTip venueId={venueId} />
                 <ul className="tip-list">
-                    {tips.sort(newestFirst).map(({ id, text, user, createdAt, visibility }) =>
+                    {tips.sort(newestFirst).map(({
+                        id,
+                        text,
+                        user,
+                        createdAt,
+                        visibility,
+                        rating = parseInt(id, 16) % 5 + 1,
+                    }) =>
                         <li className="media tip-list-item" key={id}>
                             <div className="media-body">
                                 <h4 className="media-heading">{user}</h4>
@@ -24,7 +31,7 @@ export default class TipList extends Component {
                                         {' '}
                                         <Rate
                                             label="Rating"
-                                            value={parseInt(id, 16) % 5 + 1}
+                                            defaultValue={rating}
                                             readOnly
                                         />
                                         {visibility === 'private' ? ' Private' : null}

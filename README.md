@@ -12,7 +12,7 @@ that will add a tip.
 * Code is validate with ESLint.
 
 ##Drawbacks
-There is no five-star rating for a review available via Foursquare API. Review
+Five-star rating for a review is a stub. Review
 submitted via form is only visible to the user and is not stored persistently.
 
 ##Build Instructions

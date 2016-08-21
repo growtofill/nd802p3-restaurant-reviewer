@@ -1,0 +1,16 @@
+.rate:hover {
+    color: goldenrod;
+}
+.rate[aria-readonly] {
+    color: inherit;
+}
+.rate-item {
+    cursor: pointer;
+}
+.rate-item:hover ~ .rate-item {
+    color: lightslategray;
+}
+.rate[aria-readonly] .rate-item {
+    cursor: default;
+    color: inherit;
+}
