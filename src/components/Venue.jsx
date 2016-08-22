@@ -9,7 +9,7 @@ export default class Venue extends Component {
 
         return (
             <div className="row">
-                <div className="col-sm-4">
+                <main className="col-sm-4">
                     <div className="row row-gallery">
                         {take(4, photos).map((photo, i) =>
                             <div key={i} className="col-xs-3 col-sm-6 col-gallery">
@@ -25,10 +25,10 @@ export default class Venue extends Component {
                     <div>{categories}</div>
                     <div>{location}</div>
                     <div>{hours}</div>
-                </div>
-                <div className="col-sm-8">
+                </main>
+                <aside className="col-sm-8">
                     {tips ? <TipList tips={tips} venueId={id} /> : null}
-                </div>
+                </aside>
             </div>
         );
     }

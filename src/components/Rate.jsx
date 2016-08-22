@@ -49,8 +49,8 @@ export default class Rate extends Component {
                 role="spinbutton"
                 className="rate"
                 aria-label={label}
-                aria-labeledby={labeledBy}
-                aria-readonly={readOnly}
+                aria-labelledby={labeledBy}
+                data-readonly={readOnly}
                 aria-valuemin={1}
                 aria-valuemax={max}
                 aria-valuenow={value}
@@ -75,6 +75,6 @@ export default class Rate extends Component {
 }
 
 Rate.defaultProps = {
-    defaultValue: 0,
+    defaultValue: 3,
     max: 5,
 };

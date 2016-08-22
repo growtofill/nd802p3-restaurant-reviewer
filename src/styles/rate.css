@@ -1,7 +1,7 @@
 .rate:hover {
     color: goldenrod;
 }
-.rate[aria-readonly] {
+.rate[data-readonly] {
     color: inherit;
 }
 .rate-item {
@@ -10,7 +10,7 @@
 .rate-item:hover ~ .rate-item {
     color: lightslategray;
 }
-.rate[aria-readonly] .rate-item {
+.rate[data-readonly] .rate-item {
     cursor: default;
     color: inherit;
 }
