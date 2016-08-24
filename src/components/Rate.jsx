@@ -46,14 +46,15 @@ export default class Rate extends Component {
 
         return (
             <span
-                role="spinbutton"
+                role="slider"
                 className="rate"
                 aria-label={label}
                 aria-labelledby={labeledBy}
                 data-readonly={readOnly}
                 aria-valuemin={1}
                 aria-valuemax={max}
-                aria-valuenow={value}
+                aria-valuenow={value || null}
+                aria-valuetext={value ? `${value} out of ${max}` : 'blank'}
                 tabIndex={readOnly ? null : 0}
                 onKeyDown={e => this.onKeyDown(e)}
             >
@@ -75,6 +76,6 @@ export default class Rate extends Component {
 }
 
 Rate.defaultProps = {
-    defaultValue: 3,
+    defaultValue: 0,
     max: 5,
 };
